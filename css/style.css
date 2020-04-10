@@ -1,0 +1,109 @@
+/* BASICS */
+* {
+    box-sizing: border-box;
+}
+html{
+    font-family: sans-serif;
+}
+body {
+    margin:0;
+    height: 100vh;
+}
+nav{
+    background-color: #666;
+    
+}
+canvas{
+    background: url('../graphics/transperant-background.svg') 0% 0%/16px ;
+}
+
+
+
+/* LAYOUT */
+
+/* COMPONENTS */
+.logo{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3rem;
+}
+.toggle-nav {
+    padding:    0.1rem 0.25rem;
+    background: none;
+    border: 1.5px solid #1e1e1e;
+    border-radius: 0.2rem;
+    display: none;
+}
+.toggle-nav::before{
+    content: url('../graphics/wiki-hamburger.svg');
+}
+/* PRE-EDITOR */
+.trending-kewords{
+    height: 100px;  
+}
+
+
+
+
+
+
+/* EDITOR */
+.flex.editor{
+    display: none;
+}
+.save-modal{
+    display: none;
+}
+.add::before{
+    content: '+';
+}
+.delete::before{
+    content: '🗑';
+}
+.prev::before{
+content: '↑';
+}
+.next::before{
+content: '↓';
+}
+.save::before{
+    content: '💾';
+}
+option.align-left::after{
+    content: 'left';
+}
+option.align-center::before{
+    content: 'center';
+}
+option.align-right::before{
+    content: 'right';
+}
+
+/* Main content */
+/* HELPERS */
+
+/* flex-helpers */
+.flex{
+    display: flex;
+}
+
+
+.flex.justify-center {
+    justify-content: center;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+.flex.space-around{
+    justify-content: space-around;
+}
+.flex.align-center{
+    align-items: center;
+}
+/* List helpers */
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

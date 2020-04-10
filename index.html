@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Meme-Gen</title>
+</head>
+
+<body onload="init()">
+    <nav class="flex space-between" >
+        <h1 class="logo">mylogo</h1>
+        <button class="toggle-nav"></button>
+        <ul class="flex nav-list clean-list">
+            <li><a href="">Gallery</a></li>
+            <li><a href="">Memes</a></li>
+            <li><a href="">About</a></li>
+        </ul>
+    </nav>
+    <section class="gallery">
+        <div class="flex trending-kewords align-center space-around">
+            <input type="text" placeholder="Search">
+            <a href="#">lorem</a>
+            <a href="#">ipsum</a>
+            <a href="#">dolor</a>
+        </div>
+        <div class="img-container">
+            <!-- <img onclick="openEditor(this,1)" src="/meme-imgs (square)/1.jpg" alt="image-1">
+            <img src="/meme-imgs (square)/2.jpg" alt="image-2">
+            <img src="/meme-imgs (square)/3.jpg" alt="image-3"> -->
+        </div>
+    </section>
+    <section class="flex editor space-around">
+        <canvas height="512" width="512" id="meme"></canvas>
+        <div class="control">
+            <input onchange="onTextChange(this.value)" type="text" placeholder="Enter Text">
+            <button title="Previous Text" onclick="onFocusPrevTxt()" class="prev"></button>
+            <button title="Next Text" onclick="onFocusNextTxt()" class="next"></button>
+            <button title="Add New Text" class="add"></button>
+            <button title="Delete Text line" onclick="onRemoveLayer()" class="delete"></button>
+            <select onchange="onTextAlignChange(this.value)" class="text-align align-left">
+                <option title="Align Text To Left" value="left" class="align-left">left</option>
+                <option title="Align Text To Center" value="center" class="align-center">center</option>
+                <option title="Align Text To Right" value="right" class="align-right">right</option>
+            </select>
+            <input title="Fill Color" onchange="alert(`fill color={$this.value}`)" type="color" name="fill">
+            <input title="Stroke Color" onchange="alert(`stroke color={$this.value}`)" type="color" name="stroke">
+            <button class="save"></button>
+        </div>
+    </section>
+    <section class="save-modal">
+        <a href="#" class="btn" onc lick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
+    </section>
+    <script src="js/storage-service.js"></script>
+    <script src="js/gallery-control.js"></script>
+    <script src="js/gallery-service.js"></script>
+    <script src="js/editor-control.js"></script>
+    <script src="js/editor-service.js"></script>
+</body>
+
+</html>
