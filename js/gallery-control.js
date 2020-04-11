@@ -18,6 +18,7 @@ function openEditor(elTemplateImg, imgId) {
     document.querySelector('.editor').style.display = "flex";
     createMeme(imgId);
     renderMeme();
+    renderTxtInput();
 }
 function renderImgs(){
     let imgs=getImgs();

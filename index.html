@@ -32,7 +32,7 @@
         </div>
     </section>
     <section class="flex editor space-around">
-        <canvas onmousedown="mouseIsDown()" onmousemove="drag()" onmouseup="mouseIsUp()" height="512" width="512" id="meme"></canvas>
+        <canvas onmousedown="mouseIsDown(event)" onmousemove="drag(event)" onmouseup="mouseIsUp()" height="512" width="512" id="meme"></canvas>
         <div class="control">
             <input onkeyup="onTextChange(this.value)" type="text" placeholder="Enter Text">
             <button title="Previous Text" onclick="onFocusPrevTxt()" class="prev"></button>

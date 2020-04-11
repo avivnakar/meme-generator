@@ -4,10 +4,11 @@ console.log('editor-control.js was loaded successfully');
 
 
 //Global variables and Constants
-var gCanvas = document.querySelector('#meme');
-var gCtx = gCanvas.getContext('2d');
+const gCanvas = document.querySelector('#meme');
+const gCtx = gCanvas.getContext('2d');
+var gIntervalDrag;
 var gIsMouseDown = false;
-// var gFocusLineIdx = 0;
+var gFeelsLikeADrag = false;
 //------------------------------------------------------------//
 
 function renderMeme() {
@@ -17,11 +18,9 @@ function renderMeme() {
         gCanvas.width = img.width;
         gCanvas.height = img.height;
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-        // debugger
         meme.texts.forEach((text, idx) => {
             drawPseudoText(text);
             calculatBoundriesRect(text);
-            // text.xStart=text.align==='center'?
             if (idx === meme.currLineIdx) {
                 drawFocus(text);
             }
@@ -29,53 +28,24 @@ function renderMeme() {
         });
     }
 
-    function calculatBoundriesRect(text) {
-        text.width = gCtx.measureText(text.txt).width * 1.02;
-        text.height = gCtx.measureText(text.txt).actualBoundingBoxAscent * 1.2;
-        text.yStart = text.pos.y - text.height / 1.1;
-        switch (text.align) {
-            case 'right':
-                text.xStart = text.pos.x - (text.width);
-                break;
+}
+function calculatBoundriesRect(text) {
+    text.width = gCtx.measureText(text.txt).width * 1.02;
+    text.height = gCtx.measureText(text.txt).actualBoundingBoxAscent * 1.2;
+    text.yStart = text.pos.y - text.height / 1.1;
+    switch (text.align) {
+        case 'right':
+            text.xStart = text.pos.x - (text.width);
+            break;
 
-            case 'left':
-                text.xStart = text.pos.x;
-                break;
+        case 'left':
+            text.xStart = text.pos.x;
+            break;
 
-            case 'center':
-                text.xStart = text.pos.x - (text.width / 2);
-                break;
-        }
-        // drawRect(text)
+        case 'center':
+            text.xStart = text.pos.x - (text.width / 2);
+            break;
     }
-
-
-    // console.log(meme.templateId);
-    // function renderMeme(imgId, isDownload = false) {
-    //     const imgs = getImgs();
-    //     const foundImg = imgs.find(img => {
-    //         return imgId === img.id;
-    //     })
-    //     var img = new Image();
-    //     img.src = foundImg.url;
-    //     img.onload = () => {
-
-    //         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-
-    //         let lines = getLines();
-
-    //         lines.forEach((line, idx) => {
-    //             setCanvasText(line.text, line.xPosition, line.yPosition, line.color, undefined, line.size);
-    //             let measure = gCtx.measureText(line.text)
-    //             setLineSize(idx, measure.width, measure.actualBoundingBoxAscent)
-    //         })
-    //         if (!isDownload) markLine();
-
-    //     }
-    // }
-
-
-    // ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 }
 
 function drawPseudoText({ txt, size, align, fill, stroke, font, pos }) {
@@ -159,12 +129,25 @@ function drawFocus(text) {
     // drawText(text);
 }
 
-function mouseIsDown() {
-    gIsMouseDown = true;
+function mouseIsDown(ev) {
+    gIsMouseDown = true;    
+    foo(ev.offsetX,ev.offsetY);
+    setTimeout(() => {
+        if(gIsMouseDown)gFeelsLikeADrag=true;
+    }, 200);
+    renderMeme();
 }
 function mouseIsUp() {
     gIsMouseDown = false;
+    gFeelsLikeADrag = false;
+    // clearInterval(gIntervalDrag);
 }
-function drag() {
-
+function drag(ev) {
+    if(gIsMouseDown&&gFeelsLikeADrag){
+        // gIntervalDrag=setInterval(() => {
+        // }, 600);
+        relocateText(ev.offsetX,ev.offsetY);
+        renderMeme();
+    
+    }    
 }
