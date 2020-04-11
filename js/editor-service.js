@@ -19,13 +19,13 @@ function createMeme(templateId) {
             createTxt('Bottom Text')
         ]
     }
-    gMeme.texts[0].pos.y = 25;
-    gMeme.texts[1].pos.y = (getCanvas().height - 20);
+    gMeme.texts[0].pos.y = 40;
+    gMeme.texts[1].pos.y = (getCanvas().height - 25);
 
 }
 function createTxt(txt) {
     let canvas = getCanvas();
-
+    let ctx=gCtx;
     return {
         txt,
         size: gEditorSettings.size,
@@ -42,7 +42,7 @@ function _createSetting() {
     var settings = loadFromStorage(KEY_SETTINGS);
     if (!(settings && settings.length)) {
         settings = {
-            size: 20,
+            size: 40,
             align: 'center',
             fill: 'white',
             stroke: 'black',
@@ -63,11 +63,10 @@ function changeTxt(txt) {
     if (gMeme.texts.length === 0) {
         addText(txt);
     } else gMeme.texts[idx].txt = txt;
-}
+    }
 function addText(txt) {
     gMeme.texts.push(createTxt(txt));
     gMeme.currLineIdx = (gMeme.texts.length - 1);
-
 }
 function focusNextTxt() {
     if (gMeme.currLineIdx + 1 === gMeme.texts.length) gMeme.currLineIdx = 0;
@@ -82,6 +81,26 @@ function focusPrevTxt() {
 function removeLayer() {
     gMeme.texts.splice(gMeme.currLineIdx, 1);
     focusPrevTxt();
+}
+
+function setFont(font){
+    gMeme.texts[gMeme.currLineIdx].font=font;
+}
+
+function setAlign(align){
+    gMeme.texts[gMeme.currLineIdx].align=align;
+}
+
+function setFill(fill){
+    gMeme.texts[gMeme.currLineIdx].fill=fill;
+}
+
+function setStroke(stroke){
+    gMeme.texts[gMeme.currLineIdx].stroke=stroke;
+}
+
+function setSize(size){
+    gMeme.texts[gMeme.currLineIdx].size=size;
 }
 
 // var imgContent = gCanvas.toDataURL('image/jpeg');

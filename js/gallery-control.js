@@ -15,9 +15,9 @@ function openEditor(elTemplateImg, imgId) {
     document.querySelector('.gallery').style.display = "none";
     canvas.width = elTemplateImg.width;
     canvas.height = elTemplateImg.height;
+    document.querySelector('.editor').style.display = "flex";
     createMeme(imgId);
     renderMeme();
-    document.querySelector('.editor').style.display = "flex";
 }
 function renderImgs(){
     let imgs=getImgs();
