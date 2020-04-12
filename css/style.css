@@ -82,7 +82,7 @@ canvas {
     border-radius: 5px;
     font-size: 2rem;
     padding: 0;
-    /* background-color: ; */
+/* background-color: ; */
 }
 
 .control>[type="text"] {
@@ -155,67 +155,67 @@ canvas {
     background: '💾';
 } */
 
-option[value="left"]::after {
+.control option[value="left"]::after {
     content: url('../graphics/align-left.svg');
 }
 
-option.align-center::before {
+.control option.align-center::before {
     content: 'center';
 }
 
-option.align-right::before {
+.control option.align-right::before {
     content: 'right';
 }
 
-option[value="sans-serif"] {
+.control .font option[value="sans-serif"] {
     font-family: sans-serif;
 }
 
-option[value="impact"] {
+.control .font option[value="impact"] {
     font-family: impact;
 }
 
-option[value="sans-serif"] {
+.control .font option[value="sans-serif"] {
     font-family: sans-serif;
 }
 
-option[value="Arial"] {
+.control .font option[value="Arial"] {
     font-family: arial;
 }
 
-option[value="serif"] {
+.control .font option[value="serif"] {
     font-family: serif;
 }
 
-option[value="arabolic"] {
+.control .font option[value="arabolic"] {
     font-family: arabolic;
 }
 
-option[value="waltograph"] {
+.control .font option[value="waltograph"] {
     font-family: waltograph;
 }
 
-option[value="vodka"] {
+.control .font option[value="vodka"] {
     font-family: vodka;
 }
 
-option[value="propaganda"] {
+.control .font option[value="propaganda"] {
     font-family: propaganda;
 }
 
-option[value="killigrew"] {
+.control .font option[value="killigrew"] {
     font-family: killigrew;
 }
 
-option[value="kaushan-script"] {
+.control .font option[value="kaushan-script"] {
     font-family: kaushan-script;
 }
 
-option[value="karate"] {
+.control .font option[value="karate"] {
     font-family: karate;
 }
 
-option[value="ben-zion"] {
+.control .font option[value="ben-zion"] {
     font-family: ben-zion;
 }
 
@@ -263,4 +263,47 @@ option[value="ben-zion"] {
 
 .grid {
     display: grid;
+}
+
+/*---------Font Family-------------*/
+
+@font-face {
+    font-family: arabolic;
+    src: url('../fonts/arabolical/ARABOLIC.ttf');
+}
+
+@font-face {
+    font-family: ben-zion;
+    src: url('../fonts/ben_zion/benzion.ttf');
+    /* add variations */
+}
+
+@font-face {
+    font-family: karate;
+    src: url('../fonts/karate/Karate.ttf');
+}
+
+@font-face {
+    font-family: kaushan-script;
+    src: url('../fonts/Kaushan_Script/KaushanScript-Regular.ttf');
+}
+
+@font-face {
+    font-family: killigrew;
+    src: url('../fonts/killigrew/Killig.ttf');
+}
+
+@font-face {
+    font-family: propaganda;
+    src: url('../fonts/propaganda/propaganda.ttf');
+}
+
+@font-face {
+    font-family: vodka;
+    src: url('../fonts/vodka/vodka.ttf');
+}
+
+@font-face {
+    font-family: waltograph;
+    src: url('../fonts/waltograph/waltograph42.otf');
 }
