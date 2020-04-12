@@ -10,7 +10,6 @@ var gIntervalDrag;
 var gIsMouseDown = false;
 var gFeelsLikeADrag = false;
 //------------------------------------------------------------//
-
 function renderMeme() {
     let meme = getMeme();
     let img = getImageById(meme.templateId)
@@ -27,7 +26,7 @@ function renderMeme() {
             drawText(text);
         });
     }
-
+    renderTxtInput()
 }
 function calculatBoundriesRect(text) {
     text.width = gCtx.measureText(text.txt).width * 1.02;
@@ -49,7 +48,7 @@ function calculatBoundriesRect(text) {
 }
 
 function drawPseudoText({ txt, size, align, fill, stroke, font, pos }) {
-    drawText({ txt, size, align, fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)', font, pos });
+    drawText({ txt, size:size*1.1, align, fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)', font, pos });
 }
 function drawText({ txt, size, align, fill, stroke, font, pos }) {
     // gCtx.lineWidth = '2'
@@ -90,19 +89,22 @@ function onFocusNextTxt() {
     renderMeme();
 }
 
-function changeInputValue(value) {
-    document.querySelector('.control input[type="text"]').value = value;
+function changeInputValue(elInput,value) {
+    elInput.value = value;
+}
+
+function renderTxtInput() {
+    let meme = getMeme();
+    let elInput=document.querySelector('.control input[type="text"]')
+    if (meme.texts.length === 0) changeInputValue(elInput,'');
+    else changeInputValue(elInput,meme.texts[meme.currLineIdx].txt);
+    elInput.style.fontFamily=getEditorAttr('font');
 }
 
 function onRemoveLayer() {
     removeLayer();
     renderMeme();
     renderTxtInput()
-}
-function renderTxtInput() {
-    let meme = getMeme();
-    if (meme.texts.length === 0) changeInputValue('');
-    else changeInputValue(meme.texts[meme.currLineIdx].txt);
 }
 
 function onAddText() {
@@ -150,4 +152,30 @@ function drag(ev) {
         renderMeme();
     
     }    
+}
+
+function onSetFill(value) {
+    setFill(value);
+    renderMeme();
+}
+
+function onSetStroke(value) {
+    setStroke(value);
+    renderMeme();
+}
+function onSetSize(el){
+    setSize(el.value);
+    renderMeme();
+}
+function renderSize(){
+document.querySelector('[name="font-size"]').value=getEditorAttr['size']
+}
+function toggleNav(){
+    document.querySelector('nav-list').style.display='block'
+}
+
+function renderSavedMemes(){
+    let memes=getSavedMemes();
+    memes.forEach((meme,idx)=>{console.log(`${nicecount(idx)} meme:`,meme);
+    });
 }

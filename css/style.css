@@ -1,91 +1,239 @@
 /* BASICS */
+
 * {
     box-sizing: border-box;
 }
-html{
+
+html {
     font-family: sans-serif;
 }
+
 body {
-    margin:0;
+    margin: 0;
     height: 100vh;
 }
-nav{
+
+nav {
     background-color: #666;
-    
-}
-canvas{
-    background: url('../graphics/transperant-background.svg') 0% 0%/16px ;
 }
 
-
+canvas {
+    background: url('../graphics/transperant-background.svg') 0% 0%/16px;
+}
 
 /* LAYOUT */
 
+.img-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+    margin: 0 10px 0;
+    width: 100%;
+}
+
 /* COMPONENTS */
-.logo{
+
+.logo {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 3rem;
 }
+
+.nav-list {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list>* {
+    background-color: hotpink;
+    border: 1px solid indigo;
+    font-size: 1.7rem;
+    margin-inline-start: 1em;
+}
+
+.nav-list a {
+    color: #fff;
+}
+
 .toggle-nav {
-    padding:    0.1rem 0.25rem;
+    padding: 0.1rem 0.25rem;
     background: none;
     border: 1.5px solid #1e1e1e;
     border-radius: 0.2rem;
     display: none;
 }
-.toggle-nav::before{
+
+.toggle-nav::before {
     content: url('../graphics/wiki-hamburger.svg');
 }
-/* PRE-EDITOR */
-.trending-kewords{
-    height: 100px;  
+.control{
+    /* display: grid;
+    grid-template-areas: "text text text text text"
+                        "prev next add del "
+                        "size size size font font"
+                        "l c r fill stroke"
+    ; */
+    max-width: 1000px;
 }
 
+.control>:not([type="text"]) {
+    /* background-color: hotpink; */
+    height: 50px;
+    min-width: min-content;
+    width: 50px;
+    border-radius: 5px;
+    font-size: 2rem;
+    padding: 0;
+    /* background-color: ; */
+}
 
+.control>[type="text"] {
+    margin-top: 1rem;
+    background-color: hotpink;
+    height: 3rem;
+    font-size: 1.5rem;
+    width: 50%;
+}
 
+.control .font {
+    width: max-content;
+}
 
+/* PRE-EDITOR */
 
+.trending-kewords {
+    height: 100px;
+}
 
 /* EDITOR */
-.flex.editor{
+
+.flex.editor {
     display: none;
 }
-.save-modal{
+
+.save-modal {
     display: none;
 }
-.add::before{
-    content: '+';
+
+/* .add::before {
+    content: url('../graphics/plus.svg') ;
+} */
+
+/* .delete::before {
+    content: url('../graphics/trash-alt.svg');
+} */
+
+/* .prev::before {
+    content: url('../graphics/angle-left.svg');
 }
-.delete::before{
-    content: '🗑';
+
+.next::before {
+    content: url('../graphics/angle-right.svg') ;
 }
-.prev::before{
-content: '↑';
-}
-.next::before{
-content: '↓';
-}
-.save::before{
+
+*/
+
+.save::before {
     content: '💾';
 }
-option.align-left::after{
-    content: 'left';
+
+.add {
+    background: url('../graphics/plus.svg') no-repeat center;
 }
-option.align-center::before{
+
+.delete {
+    background: url('../graphics/trash-alt.svg') no-repeat center;
+}
+
+.prev {
+    background: url('../graphics/angle-left.svg') no-repeat center;
+}
+
+.next {
+    background: url('../graphics/angle-right.svg') no-repeat center;
+}
+
+/* .save {
+    background: '💾';
+} */
+
+option[value="left"]::after {
+    content: url('../graphics/align-left.svg');
+}
+
+option.align-center::before {
     content: 'center';
 }
-option.align-right::before{
+
+option.align-right::before {
     content: 'right';
 }
 
+option[value="sans-serif"] {
+    font-family: sans-serif;
+}
+
+option[value="impact"] {
+    font-family: impact;
+}
+
+option[value="sans-serif"] {
+    font-family: sans-serif;
+}
+
+option[value="Arial"] {
+    font-family: arial;
+}
+
+option[value="serif"] {
+    font-family: serif;
+}
+
+option[value="arabolic"] {
+    font-family: arabolic;
+}
+
+option[value="waltograph"] {
+    font-family: waltograph;
+}
+
+option[value="vodka"] {
+    font-family: vodka;
+}
+
+option[value="propaganda"] {
+    font-family: propaganda;
+}
+
+option[value="killigrew"] {
+    font-family: killigrew;
+}
+
+option[value="kaushan-script"] {
+    font-family: kaushan-script;
+}
+
+option[value="karate"] {
+    font-family: karate;
+}
+
+option[value="ben-zion"] {
+    font-family: ben-zion;
+}
+
 /* Main content */
+
+.img-container>img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
 /* HELPERS */
 
 /* flex-helpers */
-.flex{
+
+.flex {
     display: flex;
 }
-
 
 .flex.justify-center {
     justify-content: center;
@@ -94,16 +242,25 @@ option.align-right::before{
 .flex.space-between {
     justify-content: space-between;
 }
-.flex.space-around{
+
+.flex.space-around {
     justify-content: space-around;
 }
-.flex.align-center{
+
+.flex.align-center {
     align-items: center;
 }
+
 /* List helpers */
 
 .clean-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+/* grid-helpers */
+
+.grid {
+    display: grid;
 }

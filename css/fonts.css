@@ -1,0 +1,43 @@
+
+/*---------Font Family-------------*/
+
+@font-face {
+    font-family: arabolic;
+    src: url('../fonts/arabolical/ARABOLIC.ttf');
+}
+
+@font-face {
+    font-family: ben-zion;
+    src: url('../fonts/ben_zion/benzion.ttf');
+    /* add variations */
+}
+
+@font-face {
+    font-family: karate;
+    src: url('../fonts/karate/Karate.ttf');
+}
+
+@font-face {
+    font-family: kaushan-script;
+    src: url('../fonts/Kaushan_Script/KaushanScript-Regular.ttf');
+}
+
+@font-face {
+    font-family: killigrew;
+    src: url('../fonts/killigrew/Killig.ttf');
+}
+
+@font-face {
+    font-family: propaganda;
+    src: url('../fonts/propaganda/propaganda.ttf');
+}
+
+@font-face {
+    font-family: vodka;
+    src: url('../fonts/vodka/vodka.ttf');
+}
+
+@font-face {
+    font-family: waltograph;
+    src: url('../fonts/waltograph/waltograph42.otf');
+}

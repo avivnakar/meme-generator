@@ -5,8 +5,8 @@ console.log('editor-service.js was loaded successfully');
 
 //Global variables and Constants
 const KEY_SETTINGS = 'theKeyOfTheMemeSettingsFromTheLocalStorage';
+const KEY_SAVED_MEMES = 'theKeyOfTheSavedMemesFromTheLocalStorage';
 var gEditorSettings = _createSetting();
-
 var gMeme;
 //------------------------------------------------------------//
 
@@ -32,7 +32,7 @@ function createTxt(txt) {
         align: gEditorSettings.align,
         fill: gEditorSettings.fill,
         stroke: gEditorSettings.stroke,
-        font: 'impact',
+        font: gEditorSettings.font,
         pos: { x: (Math.floor(canvas.width / 2)), y: (Math.floor(canvas.height / 2)) }
     }
 
@@ -40,7 +40,9 @@ function createTxt(txt) {
 
 function _createSetting() {
     var settings = loadFromStorage(KEY_SETTINGS);
-    if (!(settings && settings.length)) {
+    console.log(settings);
+    
+    if (!settings) {
         settings = {
             size: 40,
             align: 'center',
@@ -85,22 +87,33 @@ function removeLayer() {
 
 function setFont(font) {
     gMeme.texts[gMeme.currLineIdx].font = font;
+    _setEditorAttr('font',font);
 }
 
 function setAlign(align) {
     gMeme.texts[gMeme.currLineIdx].align = align;
+    _setEditorAttr('align',align);
 }
 
 function setFill(fill) {
     gMeme.texts[gMeme.currLineIdx].fill = fill;
+    _setEditorAttr('fill',fill);
 }
 
 function setStroke(stroke) {
     gMeme.texts[gMeme.currLineIdx].stroke = stroke;
+    _setEditorAttr('stroke',stroke);
 }
-
+function _setEditorAttr(attr,value) {
+    gEditorSettings[attr]=value;
+    _saveSettings();
+}
+function getEditorAttr(attr) {
+    return gEditorSettings[attr]
+}
 function setSize(size) {
     gMeme.texts[gMeme.currLineIdx].size = size;
+    _setEditorAttr('size',size);
 }
 function relocateText(x, y) {
     gMeme.texts[gMeme.currLineIdx].pos.x = x;
@@ -122,7 +135,14 @@ function foo(x, y) {
         gMeme.currLineIdx=idx;
     }
 }
-
+function addToSavedMemes(meme){
+    let memes=getSavedMemes();
+    memes.push(meme);
+    saveToStorage(KEY_SAVED_MEMES,memes);
+}
+function getSavedMemes() {
+    return loadFromStorage(KEY_SAVED_MEMES);
+}
 // var imgContent = gCanvas.toDataURL('image/jpeg');
 // elLink.href = imgContent
 

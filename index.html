@@ -4,18 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Meme-Gen</title>
 </head>
 
-<body onload="init()">
+<body>
     <nav class="flex space-between" >
         <h1 class="logo">mylogo</h1>
-        <button class="toggle-nav"></button>
+        <button onclick="toggleNav()" class="toggle-nav"></button>
         <ul class="flex nav-list clean-list">
-            <li><a href="">Gallery</a></li>
-            <li><a href="">Memes</a></li>
-            <li><a href="">About</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li onclick=""><a href="#">Blank Editor</a></li>
+            <li><a href="#">Memes</a></li>
+            <li><a href="#">About</a></li>
         </ul>
     </nav>
     <section class="gallery">
@@ -25,13 +27,16 @@
             <a href="#">ipsum</a>
             <a href="#">dolor</a>
         </div>
-        <div class="img-container">
-            <!-- <img onclick="openEditor(this,1)" src="/meme-imgs (square)/1.jpg" alt="image-1">
-            <img src="/meme-imgs (square)/2.jpg" alt="image-2">
-            <img src="/meme-imgs (square)/3.jpg" alt="image-3"> -->
-        </div>
-    </section>
-    <section class="flex editor space-around">
+            <div class="img-container grid"></div>
+        </section>
+        <!-- <section class="editor-config" >
+            <form onsubmit="">
+            <input type="number" name="canvas-width">
+            <input type="number" name="canvas-height">
+            <input type="checkbox" name="whatsapp-sticker" id="">
+        </form>
+    </section> -->
+    <section class="editor flex space-around">
         <canvas onmousedown="mouseIsDown(event)" onmousemove="drag(event)" onmouseup="mouseIsUp()" height="512" width="512" id="meme"></canvas>
         <div class="control">
             <input onkeyup="onTextChange(this.value)" type="text" placeholder="Enter Text">
@@ -45,22 +50,41 @@
                 <option title="Align Text To Right" value="right" class="align-right">right</option>
             </select>
             <select onchange="onFontChange(this.value)" class="font">
-                <option value="impct">Impact</option>
+                <option value="impact">Impact</option>
+                <option value="sans-serif">Sans-Serif</option>
+                <option value="Arial">Arial</option>
                 <option value="serif">Serif</option>
+                <option value="arabolic">Arabolic</option>
+                <option value="waltograph">Waltograph</option>
+                <option value="vodka">Vodka</option>
+                <option value="propaganda">Propaganda</option>
+                <option value="killigrew">Killigrew</option>
+                <option value="kaushan-script">Kaushan Script</option>
+                <option value="karate">Karate</option>
+                <option value="ben-zion">Ben Zion</option>
             </select>
-            <input title="Fill Color" onchange="alert(`fill color={$this.value}`)" type="color" name="fill">
-            <input title="Stroke Color" onchange="alert(`stroke color={$this.value}`)" type="color" name="stroke">
-            <button class="save"></button>
+            <input onchange="onSetSize(this)" type="number" min="8" name="font-size">
+        <input title="Fill Color" onchange="onSetFill(this.value)" type="color" name="fill">
+            <input title="Stroke Color" onchange="onSetStroke(this.value)" type="color" name="stroke">
+            <button title="Save Localy" class="save"></button>
+            <div class="export-options" hidden>
+                <button title="Save Localy" class="save"></button>
+                <button title="Save as jpg" class="save"></button>
+                <button title="Save as png" class="save"></button>
+                <button title="Save as webmp" class="save"></button>
+                <button title="Save as webmp" class="save"></button>
+            </div>
         </div>
     </section>
     <section class="save-modal">
         <a href="#" class="btn" onc lick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
     </section>
+    <script src="js/utils.js"></script>
     <script src="js/storage-service.js"></script>
-    <script src="js/gallery-control.js"></script>
     <script src="js/gallery-service.js"></script>
-    <script src="js/editor-control.js"></script>
+    <script src="js/gallery-control.js"></script>
     <script src="js/editor-service.js"></script>
+    <script src="js/editor-control.js"></script>
 </body>
 
 </html>
