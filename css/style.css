@@ -9,12 +9,24 @@ html {
 }
 
 body {
+    background:orange;
     margin: 0;
     height: 100vh;
 }
+select,button{
+    cursor: pointer;
+}
 
-nav {
-    background-color: #666;
+nav, footer {
+    background-color: dimgray;
+}
+
+footer {
+    height: 100%;
+}
+
+small {
+    margin: 0 auto;
 }
 
 canvas {
@@ -25,6 +37,7 @@ canvas {
 
 .img-container {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-rows: max-content;
     gap: 10px;
     margin: 0 10px 0;
     width: 100%;
@@ -33,68 +46,58 @@ canvas {
 /* COMPONENTS */
 
 .logo {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 3rem;
+    margin-inline-start: 0.5em;
+    font-family: kaushan-script;
+    text-transform: capitalize;
+    color: tomato;
+    font-size: 4rem;
+}
+
+.logo span {
+    color: red;
+    font-family: karate;
+    text-transform: uppercase;
 }
 
 .nav-list {
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
 .nav-list>* {
-    background-color: hotpink;
-    border: 1px solid indigo;
+    /* background-color: hotpink; */
+    /* border: 1px solid indigo; */
+    border-radius: 5px;
+    padding: 0.1em;
     font-size: 1.7rem;
     margin-inline-start: 1em;
 }
 
-.nav-list a {
+.nav-list {
     color: #fff;
 }
 
 .toggle-nav {
+    margin: auto;
+    /* margin-inline-start: 3em; */
     padding: 0.1rem 0.25rem;
     background: none;
-    border: 1.5px solid #1e1e1e;
+    border: 3px solid #1e1e1e;
     border-radius: 0.2rem;
+    height: 60px;
+    min-width: 70px;
+    background: url('../graphics/wiki-hamburger.svg') center no-repeat;
+    background-size: contain;
     display: none;
 }
 
-.toggle-nav::before {
-    content: url('../graphics/wiki-hamburger.svg');
-}
-.control{
-    /* display: grid;
-    grid-template-areas: "text text text text text"
-                        "prev next add del "
-                        "size size size font font"
-                        "l c r fill stroke"
-    ; */
-    max-width: 1000px;
+.toggle-nav:hover {
+    border: 4px solid #1e1e1e;
 }
 
-.control>:not([type="text"]) {
-    /* background-color: hotpink; */
-    height: 50px;
-    min-width: min-content;
-    width: 50px;
-    border-radius: 5px;
-    font-size: 2rem;
-    padding: 0;
-/* background-color: ; */
-}
-
-.control>[type="text"] {
-    margin-top: 1rem;
-    background-color: hotpink;
-    height: 3rem;
-    font-size: 1.5rem;
-    width: 50%;
-}
-
-.control .font {
-    width: max-content;
+.toggle-nav:active {
+    background-color: lightgray;
 }
 
 /* PRE-EDITOR */
@@ -107,53 +110,100 @@ canvas {
 
 .flex.editor {
     display: none;
+    max-width: 90vw;
 }
 
 .save-modal {
     display: none;
 }
 
-/* .add::before {
-    content: url('../graphics/plus.svg') ;
-} */
-
-/* .delete::before {
-    content: url('../graphics/trash-alt.svg');
-} */
-
-/* .prev::before {
-    content: url('../graphics/angle-left.svg');
+.save{
+    grid-area: 5/5/span 1/span 2;
+    background-color: unset;
 }
-
-.next::before {
-    content: url('../graphics/angle-right.svg') ;
-}
-
-*/
-
 .save::before {
     content: '💾';
 }
 
 .add {
     background: url('../graphics/plus.svg') no-repeat center;
+    background-size: contain;
+    grid-area: 2/6/span 1 /span 2;
 }
 
 .delete {
     background: url('../graphics/trash-alt.svg') no-repeat center;
+    background-size: contain;
+    grid-area: 2/10;
 }
 
 .prev {
-    background: url('../graphics/angle-left.svg') no-repeat center;
+	background: url('../graphics/angle-left.svg') no-repeat center;
+	background-size: contain;
+	grid-area: 2/1;
 }
-
 .next {
     background: url('../graphics/angle-right.svg') no-repeat center;
+    background-size: contain;
+    grid-area: 2/3;
 }
 
 /* .save {
     background: '💾';
 } */
+
+.control {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    max-width: 600px;
+}
+/* .control select,.control option{
+    background-color:peachpuff;
+} */
+
+.control * {
+    height: 50px;
+    min-width: 50px;
+    border-radius: 5px;
+    font-size: 2rem;
+    padding: 0;
+}
+
+.control button{
+    border: none;
+}
+
+.control [type="text"] {
+    grid-area: 1/span 10;
+    margin-top: 1rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    width: 100%;
+    background-color: rgb(255, 241, 212);
+}
+.control select{
+    background-color: rgb(255, 241, 212);
+}
+.control .font {
+    width: max-content;
+    grid-area: 4/span 4;
+}
+.text-align {
+	grid-area: 3 / 3 /span 1 /span 4;
+}
+.control input[name="font-size"] {
+    background-color: rgb(255, 241, 212);
+    width: 60px;
+    grid-area: 3/9;
+}
+.control input[name="fill"] {
+    grid-area: 4/10;
+}
+.control input[name="stroke"] {
+    grid-area: 4/8;
+}
+
 
 .control option[value="left"]::after {
     content: url('../graphics/align-left.svg');
@@ -224,7 +274,7 @@ canvas {
 .img-container>img {
     object-fit: cover;
     width: 100%;
-    height: 100%;
+    align-self: stretch;
 }
 
 /* HELPERS */

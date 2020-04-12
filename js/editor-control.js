@@ -9,9 +9,12 @@ const gCtx = gCanvas.getContext('2d');
 var gIntervalDrag;
 var gIsMouseDown = false;
 var gFeelsLikeADrag = false;
+var gAsyncCheat = undefined;
 //------------------------------------------------------------//
 function renderMeme() {
+    
     let meme = getMeme();
+    
     let img = getImageById(meme.templateId)
     img.onload = () => {
         gCanvas.width = img.width;
@@ -20,10 +23,13 @@ function renderMeme() {
         meme.texts.forEach((text, idx) => {
             drawPseudoText(text);
             calculatBoundriesRect(text);
-            if (idx === meme.currLineIdx) {
+            // console.log(gIsExporting)
+            if (gAsyncCheat===undefined&&idx === meme.currLineIdx) {
+                console.log('FUCK U')
                 drawFocus(text);
             }
             drawText(text);
+            if(gAsyncCheat!==undefined)gAsyncCheat();
         });
     }
     renderTxtInput()
@@ -48,7 +54,7 @@ function calculatBoundriesRect(text) {
 }
 
 function drawPseudoText({ txt, size, align, fill, stroke, font, pos }) {
-    drawText({ txt, size:size*1.1, align, fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)', font, pos });
+    drawText({ txt, size: size * 1.1, align, fill: 'rgba(0,0,0,0)', stroke: 'rgba(0,0,0,0)', font, pos });
 }
 function drawText({ txt, size, align, fill, stroke, font, pos }) {
     // gCtx.lineWidth = '2'
@@ -89,16 +95,16 @@ function onFocusNextTxt() {
     renderMeme();
 }
 
-function changeInputValue(elInput,value) {
+function changeInputValue(elInput, value) {
     elInput.value = value;
 }
 
 function renderTxtInput() {
     let meme = getMeme();
-    let elInput=document.querySelector('.control input[type="text"]')
-    if (meme.texts.length === 0) changeInputValue(elInput,'');
-    else changeInputValue(elInput,meme.texts[meme.currLineIdx].txt);
-    elInput.style.fontFamily=getEditorAttr('font');
+    let elInput = document.querySelector('.control input[type="text"]')
+    if (meme.texts.length === 0) changeInputValue(elInput, '');
+    else changeInputValue(elInput, meme.texts[meme.currLineIdx].txt);
+    elInput.style.fontFamily = getEditorAttr('font');
 }
 
 function onRemoveLayer() {
@@ -132,10 +138,10 @@ function drawFocus(text) {
 }
 
 function mouseIsDown(ev) {
-    gIsMouseDown = true;    
-    foo(ev.offsetX,ev.offsetY);
+    gIsMouseDown = true;
+    considerTextAlign(ev.offsetX, ev.offsetY);
     setTimeout(() => {
-        if(gIsMouseDown)gFeelsLikeADrag=true;
+        if (gIsMouseDown) gFeelsLikeADrag = true;
     }, 200);
     renderMeme();
 }
@@ -145,13 +151,13 @@ function mouseIsUp() {
     // clearInterval(gIntervalDrag);
 }
 function drag(ev) {
-    if(gIsMouseDown&&gFeelsLikeADrag){
+    if (gIsMouseDown && gFeelsLikeADrag) {
         // gIntervalDrag=setInterval(() => {
         // }, 600);
-        relocateText(ev.offsetX,ev.offsetY);
+        relocateText(ev.offsetX, ev.offsetY);
         renderMeme();
-    
-    }    
+
+    }
 }
 
 function onSetFill(value) {
@@ -163,19 +169,42 @@ function onSetStroke(value) {
     setStroke(value);
     renderMeme();
 }
-function onSetSize(el){
+function onSetSize(el) {
     setSize(el.value);
     renderMeme();
 }
-function renderSize(){
-document.querySelector('[name="font-size"]').value=getEditorAttr['size']
+function renderSize() {
+    document.querySelector('[name="font-size"]').value = getEditorAttr['size']
 }
-function toggleNav(){
-    document.querySelector('nav-list').style.display='block'
+function toggleNav() {
+    document.querySelector('nav-list').style.display = 'block'
 }
 
-function renderSavedMemes(){
-    let memes=getSavedMemes();
-    memes.forEach((meme,idx)=>{console.log(`${nicecount(idx)} meme:`,meme);
+function renderSavedMemes() {
+    let memes = getSavedMemes();
+    memes.forEach((meme, idx) => {
+        console.log(`${nicecount(idx)} meme:`, meme);
     });
+}
+function onSave(destination, type) {
+    if(gAsyncCheat===undefined){
+        gAsyncCheat=()=>{
+            onSave(destination,type)
+        }
+        renderMeme();
+    }else{
+        const meme = {};
+    meme.dataURL = gCanvas.toDataURL(`image/${type}`);
+    addToSavedMemes(meme);
+    gAsyncCheat=undefined;
+    }
+    
+    // switch (destination) {
+
+    //     case 'localStorage':
+    //     default:
+
+
+    //         break;
+    // }
 }

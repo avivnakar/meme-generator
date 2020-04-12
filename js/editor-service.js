@@ -42,7 +42,7 @@ function _createSetting() {
     var settings = loadFromStorage(KEY_SETTINGS);
     console.log(settings);
     
-    if (!settings) {
+    if (!settings||settings===undefined||settings===null) {
         settings = {
             size: 40,
             align: 'center',
@@ -51,6 +51,7 @@ function _createSetting() {
             font: 'impact'
         }
     }
+    console.log(settings);
     return settings;
 }
 function _saveSettings() {
@@ -120,7 +121,7 @@ function relocateText(x, y) {
     gMeme.texts[gMeme.currLineIdx].pos.y = y;
 }
 
-function foo(x, y) {
+function considerTextAlign(x, y) {
     let idx = gMeme.texts.findIndex(text => {
         return x > text.xStart &&
                x < text.xStart + text.width &&
@@ -137,40 +138,16 @@ function foo(x, y) {
 }
 function addToSavedMemes(meme){
     let memes=getSavedMemes();
+    memes=memes?memes:[];
     memes.push(meme);
     saveToStorage(KEY_SAVED_MEMES,memes);
 }
 function getSavedMemes() {
     return loadFromStorage(KEY_SAVED_MEMES);
 }
-// var imgContent = gCanvas.toDataURL('image/jpeg');
-// elLink.href = imgContent
-
-
-// The next 2 functions handle IMAGE UPLOADING to img tag from file system: 
-// function onImgInput(ev) {
-//     loadImageFromInput(ev, renderCanvas)
-// }
-// function loadImageFromInput(ev, onImageReady) {
-//     document.querySelector('.share-container').innerHTML = ''
-//     var reader = new FileReader();
-
-//     reader.onload = function (event) {
-//         var img = new Image();
-//         img.onload = onImageReady.bind(null, img)
-//         img.src = event.target.result;
-//     }
-//     reader.readAsDataURL(ev.target.files[0]);
-// }
-/** TEXT RENDERING
- * gCtx.direction = ltr,rtl,inherit
- * gCtx.textBaseline = top, hanging , middle, alphabetic, ideographicm bottom
- * gCtx.textAlign= start, end, left, right, center
- * gCtx.font = 10px sans-serif
- *
- * TEXT FILL\STROKE
- * gCtx.fillStyle = #000
- * gCtx.strokeStyle = #000
- * gCtx.scale()
- *
- */
+function getMemesKey() {
+    return KEY_SAVED_MEMES;
+}
+function removeFocus(){
+    gMeme.currLineIdx=-1;
+}

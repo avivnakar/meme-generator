@@ -10,14 +10,14 @@
 </head>
 
 <body>
-    <nav class="flex space-between" >
-        <h1 class="logo">mylogo</h1>
+    <nav class="flex space-between">
+        <h1 class="logo"><span>my</span>logo</h1>
         <button onclick="toggleNav()" class="toggle-nav"></button>
         <ul class="flex nav-list clean-list">
-            <li><a href="#">Gallery</a></li>
-            <li onclick=""><a href="#">Blank Editor</a></li>
-            <li><a href="#">Memes</a></li>
-            <li><a href="#">About</a></li>
+            <li>Gallery</li>
+            <li>Blank Editor</li>
+            <li onclick="renderMemes()">Memes</li>
+            <li>About</li>
         </ul>
     </nav>
     <section class="gallery">
@@ -27,9 +27,9 @@
             <a href="#">ipsum</a>
             <a href="#">dolor</a>
         </div>
-            <div class="img-container grid"></div>
-        </section>
-        <!-- <section class="editor-config" >
+        <div class="img-container grid"></div>
+    </section>
+    <!-- <section class="editor-config" >
             <form onsubmit="">
             <input type="number" name="canvas-width">
             <input type="number" name="canvas-height">
@@ -37,7 +37,8 @@
         </form>
     </section> -->
     <section class="editor flex space-around">
-        <canvas onmousedown="mouseIsDown(event)" onmousemove="drag(event)" onmouseup="mouseIsUp()" height="512" width="512" id="meme"></canvas>
+        <canvas onmousedown="mouseIsDown(event)" onmousemove="drag(event)" onmouseup="mouseIsUp()" height="512"
+            width="512" id="meme"></canvas>
         <div class="control">
             <input onkeyup="onTextChange(this.value)" type="text" placeholder="Enter Text">
             <button title="Previous Text" onclick="onFocusPrevTxt()" class="prev"></button>
@@ -63,13 +64,13 @@
                 <option value="karate">Karate</option>
                 <option value="ben-zion">Ben Zion</option>
             </select>
-            <input onchange="onSetSize(this)" type="number" min="8" name="font-size">
-        <input title="Fill Color" onchange="onSetFill(this.value)" type="color" name="fill">
+            <input onchange="onSetSize(this)" type="number" min="8" value="40" name="font-size">
+            <input title="Fill Color" onchange="onSetFill(this.value)" type="color" name="fill">
             <input title="Stroke Color" onchange="onSetStroke(this.value)" type="color" name="stroke">
-            <button title="Save Localy" class="save"></button>
+            <button onclick="onSave('localStorage','png')" title="Save Localy" class="save"></button>
             <div class="export-options" hidden>
                 <button title="Save Localy" class="save"></button>
-                <button title="Save as jpg" class="save"></button>
+                <button title="Save as jpeg" class="save"></button>
                 <button title="Save as png" class="save"></button>
                 <button title="Save as webmp" class="save"></button>
                 <button title="Save as webmp" class="save"></button>
@@ -79,6 +80,10 @@
     <section class="save-modal">
         <a href="#" class="btn" onc lick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
     </section>
+    <footer>
+        <h1 class="logo"><span>my</span>logo</h1>
+        <small>Lorem ipsum dolor sit amet consectetur.</small>
+    </footer>
     <script src="js/utils.js"></script>
     <script src="js/storage-service.js"></script>
     <script src="js/gallery-service.js"></script>

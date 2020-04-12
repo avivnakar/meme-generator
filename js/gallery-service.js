@@ -13,7 +13,7 @@ function _createImgs() {
     for (let i = 1; i < 19; i++) {
         imgs.push({
             id: i,
-            url: `/meme-imgs (square)/${i}.jpg`,
+            url: `./template-imgs/${i}.jpg`,
             keywords: []
         })
     }
@@ -25,7 +25,7 @@ function getImageById(id) {
     })
     // console.log(image.url);
     var img = new Image();
-    img.src = '.'+image.url;
+    img.src = image.url;
     // img.onload = (onImageReady.bind(null, img))
     return img;
 }
