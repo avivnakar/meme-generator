@@ -25,7 +25,6 @@ function renderMeme() {
             calculatBoundriesRect(text);
             // console.log(gIsExporting)
             if (gAsyncCheat===undefined&&idx === meme.currLineIdx) {
-                console.log('FUCK U')
                 drawFocus(text);
             }
             drawText(text);
