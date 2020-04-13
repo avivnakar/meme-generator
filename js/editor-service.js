@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('editor-service.js was loaded successfully');
+console.log('editor-service.js was  loaded successfully');
 
 
 //Global variables and Constants
@@ -130,9 +130,6 @@ function considerTextAlign(x, y) {
     });
     console.log(idx);
     if(idx>=0){
-        // const temp = gMeme.texts.splice(idx,1);
-        // gMeme.texts.push(temp);
-        // gMeme.currLineIdx = (gMeme.texts.length - 1);
         gMeme.currLineIdx=idx;
     }
 }

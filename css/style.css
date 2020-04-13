@@ -7,9 +7,11 @@
 html {
     font-family: sans-serif;
 }
-
+h1{
+    margin: 0;
+}
 body {
-    background:orange;
+    /* background:rgb(88, 87, 85); */
     margin: 0;
     height: 100vh;
 }
@@ -22,8 +24,9 @@ nav, footer {
 }
 
 footer {
-    height: 100%;
+    height: 250px;
 }
+
 
 small {
     margin: 0 auto;
@@ -31,6 +34,7 @@ small {
 
 canvas {
     background: url('../graphics/transperant-background.svg') 0% 0%/16px;
+    outline: solid #bbb;
 }
 
 /* LAYOUT */
@@ -39,7 +43,7 @@ canvas {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-template-rows: max-content;
     gap: 10px;
-    margin: 0 10px 0;
+    padding: 0 10px 0;
     width: 100%;
 }
 
@@ -111,6 +115,12 @@ canvas {
 .flex.editor {
     display: none;
     max-width: 90vw;
+    margin: 0 auto;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    background-color: #efefef;
+    align-items: center;
+    height: 650px;
 }
 
 .save-modal {
@@ -118,12 +128,26 @@ canvas {
 }
 
 .save{
-    grid-area: 5/5/span 1/span 2;
-    background-color: unset;
+    grid-area: 5/3;
+    /* background-color: unset; */
+    background: url('../graphics/download.svg') no-repeat center;
 }
-.save::before {
-    content: '💾';
+.save.webp{
+    grid-area: 5/5;
+    /* background-color: unset; */
+    background: url('../graphics/download.svg') no-repeat center;
 }
+.save.png{
+    grid-area: 5/6;
+    /* background-color: unset; */
+    background: url('../graphics/download.svg') no-repeat center;
+}
+.save.jpg{
+    grid-area: 5/7;
+    /* background-color: unset; */
+    background: url('../graphics/download.svg') no-repeat center;
+}
+
 
 .add {
     background: url('../graphics/plus.svg') no-repeat center;
@@ -148,14 +172,12 @@ canvas {
     grid-area: 2/3;
 }
 
-/* .save {
-    background: '💾';
-} */
 
 .control {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(5, 1fr);
+    gap: 25px;
     max-width: 600px;
 }
 /* .control select,.control option{
@@ -180,11 +202,11 @@ canvas {
     height: 3rem;
     font-size: 1.5rem;
     width: 100%;
-    background-color: rgb(255, 241, 212);
+    /* background-color: lightcyan; */
 }
-.control select{
-    background-color: rgb(255, 241, 212);
-}
+/* .control select{
+    background-color: lightcyan;
+} */
 .control .font {
     width: max-content;
     grid-area: 4/span 4;
@@ -193,9 +215,12 @@ canvas {
 	grid-area: 3 / 3 /span 1 /span 4;
 }
 .control input[name="font-size"] {
-    background-color: rgb(255, 241, 212);
+    /* background-color: lightcyan; */
     width: 60px;
     grid-area: 3/9;
+}
+.control [type="color"]{
+    cursor: pointer;
 }
 .control input[name="fill"] {
     grid-area: 4/10;

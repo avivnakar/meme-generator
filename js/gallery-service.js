@@ -19,16 +19,8 @@ function _createImgs() {
     }
     return imgs;
 }
-function getImageById(id) {
-    var image = gImgs.find(img => {
-        if (img.id === id) return img
-    })
-    // console.log(image.url);
-    var img = new Image();
-    img.src = image.url;
-    // img.onload = (onImageReady.bind(null, img))
-    return img;
-}
+
+
 function getImgs(){
     return gImgs;
 }

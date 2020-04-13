@@ -11,6 +11,7 @@
 
 <body>
     <nav class="flex space-between">
+        <button onclick="localStorage.clear()" class="clear-storage"></button>
         <h1 class="logo"><span>my</span>logo</h1>
         <button onclick="toggleNav()" class="toggle-nav"></button>
         <ul class="flex nav-list clean-list">
@@ -45,11 +46,11 @@
             <button title="Next Text" onclick="onFocusNextTxt()" class="next"></button>
             <button title="Add New Text" onclick="onAddText()" class="add"></button>
             <button title="Delete Text line" onclick="onRemoveLayer()" class="delete"></button>
-            <select onchange="onTextAlignChange(this.value)" class="text-align align-left">
+            <!-- <select onchange="onTextAlignChange(this.value)" class="text-align align-left">
                 <option title="Align Text To Left" value="left" class="align-left">left</option>
                 <option title="Align Text To Center" value="center" class="align-center">center</option>
                 <option title="Align Text To Right" value="right" class="align-right">right</option>
-            </select>
+            </select> -->
             <select onchange="onFontChange(this.value)" class="font">
                 <option value="impact">Impact</option>
                 <option value="sans-serif">Sans-Serif</option>
@@ -67,18 +68,15 @@
             <input onchange="onSetSize(this)" type="number" min="8" value="40" name="font-size">
             <input title="Fill Color" onchange="onSetFill(this.value)" type="color" name="fill">
             <input title="Stroke Color" onchange="onSetStroke(this.value)" type="color" name="stroke">
-            <button onclick="onSave('localStorage','png')" title="Save Localy" class="save"></button>
-            <div class="export-options" hidden>
-                <button title="Save Localy" class="save"></button>
-                <button title="Save as jpeg" class="save"></button>
-                <button title="Save as png" class="save"></button>
-                <button title="Save as webmp" class="save"></button>
-                <button title="Save as webmp" class="save"></button>
-            </div>
+            <button onclick="onSave('localStorage','jpeg')" title="Save Localy" class="save"></button>
+            <button title="Save Localy" class="save"></button>
+            <a onclick="onSave('download','jpeg',this)" title="Save as jpeg" class="save jpg" download="meme.jpg"></a>
+            <a onclick="onSave('download','png',this)" title="Save as png" class="save png" download="meme.png"></a>
+            <a onclick="onSave('download','webp',this)" title="Save as webp" class="save webp" download="sticker.webp"></a>
         </div>
     </section>
     <section class="save-modal">
-        <a href="#" class="btn" onc lick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
+        <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
     </section>
     <footer>
         <h1 class="logo"><span>my</span>logo</h1>

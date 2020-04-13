@@ -15,18 +15,17 @@ console.log('gallery-control.js was loaded successfully');
         elContainer.innerHTML += strHTML;
     })
 })();
-// function init(){
-// renderImgs();
-// }
 
 function openEditor(elTemplateImg, imgId) {
     let canvas = getCanvas()
+    window.scroll(0,0);
     document.querySelector('.gallery').style.display = 'none';
     canvas.width = elTemplateImg.width;
     canvas.style.minWidth = `${elTemplateImg.width}px`;
     canvas.height = elTemplateImg.height;
     canvas.style.minHeight = `${elTemplateImg.height}px`;
     document.querySelector('.editor').style.display = 'flex';
+    setElImg(elTemplateImg);
     createMeme(imgId);
     renderMeme();
     renderTxtInput();
