@@ -10,9 +10,9 @@ var gImgs = _createImgs();
 
 function _createImgs() {
     var imgs = [];
-    for (let i = 1; i < 19; i++) {
+    for (let i = 0; i < 25; i++) {
         imgs.push({
-            id: i,
+            id: i+1,
             url: `./template-imgs/${i}.jpg`,
             keywords: []
         })
